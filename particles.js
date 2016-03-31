@@ -1,7 +1,9 @@
-var canvas = document.querySelector('#playground');
+var canvas = document.querySelector('.particles');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 var ctx = canvas.getContext('2d');
+
 var particles = [
     { x: 50, y: 50, r: 20, color: 'red' },
     { x: 150, y: 20, r: 10, color: 'green' },
