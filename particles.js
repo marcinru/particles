@@ -10,9 +10,9 @@ var particles = [
     { x: 100, y: 150, r: 50, color: 'blue' }
 ];
 
-for (var i = 0; i < particles.length; i++) {
-    draw(particles[i]);
-}
+particles.forEach(function (particle) {
+    draw(particle);
+});
 
 function draw(particle) {
     ctx.beginPath();
