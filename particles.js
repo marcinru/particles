@@ -22,11 +22,11 @@ var Particle = function() {
 };
 
 function randomColour(){
-    return Math.floor(Math.random() * 255)+',';
+    return Math.floor(Math.random() * 255) + ', ';
 }
 
 Particle.prototype.init = function() {
-    this._color = 'rgba('+randomColour()+randomColour()+randomColour() +  '0.5)';
+    this._color = 'rgba(' + randomColour() + randomColour() + randomColour() + '0.5)';
     this._x = Math.random() * canvas.width;
     this._y = Math.random() * canvas.height;
     this._radius = 50 + Math.random() * 50;
