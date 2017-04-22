@@ -1,5 +1,5 @@
-var canvas = document.querySelector('#particles');
-var ctx = canvas.getContext('2d');
+const canvas = document.querySelector('#particles');
+const ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -9,7 +9,7 @@ var Particle = function() {
 };
 
 Particle.prototype.init = function() {
-    this._color = 'rgba(' + randomColour() + randomColour() + randomColour() + '0.5)';
+    this._color = getRandomColor();
     this._x = Math.random() * canvas.width;
     this._y = Math.random() * canvas.height;
     this._radius = 50 + Math.random() * 50;
@@ -51,6 +51,10 @@ ParticleMob.prototype.tick = function() {
     window.requestAnimationFrame(animationLoop);
 })();
 
-function randomColour(){
-    return Math.floor(Math.random() * 255) + ', ';
+function getRandomColor() {
+    let rgb = 'rgba(', i;
+    for (i = 0; i < 3; i++) {
+        rgb += Math.floor(Math.random() * 255) + ', ';
+    }
+    return rgb + '0.5)';
 }
