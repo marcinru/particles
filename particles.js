@@ -4,30 +4,30 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var Particle = function() {
-    this.init();
-};
-
-Particle.prototype.init = function() {
-    this._color = getRandomColor();
-    this._x = Math.random() * canvas.width;
-    this._y = Math.random() * canvas.height;
-    this._radius = 50 + Math.random() * 50;
-};
-
-Particle.prototype.draw = function() {
-    ctx.fillStyle = this._color;
-    ctx.beginPath();
-    ctx.arc(this._x, this._y, this._radius, 0, Math.PI * 2);
-    ctx.fill();
-};
-
-Particle.prototype.tick = function() {
-    if (this._radius < 2) {
-        this.init();
+class Particle {
+    constructor() {
+        this.randomize();
     }
-    this._radius -= Math.random();
-};
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    randomize() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = 50 + Math.random() * 50;
+        this.color = getRandomColor();
+    }
+    tick() {
+        if (this.radius < 2) {
+            this.randomize();
+        }
+        this.radius -= Math.random();
+    }
+}
+
 
 var ParticleMob = function(){
     this._particles = [];
@@ -40,7 +40,7 @@ var mob = new ParticleMob();
 
 ParticleMob.prototype.tick = function() {
     this._particles.forEach(function(particle) {
-        particle.draw();
+        particle.draw(ctx);
         particle.tick();
     });
 };
