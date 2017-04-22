@@ -1,29 +1,12 @@
-var canvas = document.querySelector('.particles');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+var canvas = document.querySelector('#particles');
 var ctx = canvas.getContext('2d');
 
-var ParticleMob = function(){
-    this._particles = [];
-    for (var i = 0; i < 50; i++) {
-        this._particles.push(new Particle());
-    }
-};
-
-ParticleMob.prototype.tick = function() {
-    this._particles.forEach(function(particle) {
-        particle.draw();
-        particle.tick();
-    });
-};
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 var Particle = function() {
     this.init();
 };
-
-function randomColour(){
-    return Math.floor(Math.random() * 255) + ', ';
-}
 
 Particle.prototype.init = function() {
     this._color = 'rgba(' + randomColour() + randomColour() + randomColour() + '0.5)';
@@ -46,10 +29,28 @@ Particle.prototype.tick = function() {
     this._radius -= Math.random();
 };
 
+var ParticleMob = function(){
+    this._particles = [];
+    for (var i = 0; i < 50; i++) {
+        this._particles.push(new Particle());
+    }
+};
+
 var mob = new ParticleMob();
 
-(function animation(){
+ParticleMob.prototype.tick = function() {
+    this._particles.forEach(function(particle) {
+        particle.draw();
+        particle.tick();
+    });
+};
+
+(function animationLoop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     mob.tick();
-    window.requestAnimationFrame(animation);
+    window.requestAnimationFrame(animationLoop);
 })();
+
+function randomColour(){
+    return Math.floor(Math.random() * 255) + ', ';
+}
