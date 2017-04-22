@@ -1,6 +1,5 @@
 const canvas = document.querySelector('#particles');
 const ctx = canvas.getContext('2d');
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -54,7 +53,6 @@ class ParticlesMob {
 }
 
 const mob = new ParticlesMob();
-
 (function animationLoop(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     mob.tick();
