@@ -5,11 +5,11 @@ canvas.height = window.innerHeight;
 
 class Randomizer {
     static getRandomColor() {
-        let rgb = 'rgba(', i;
-        for (i = 0; i < 3; i++) {
+        let rgb = '';
+        for (let i = 0; i < 3; i++) {
             rgb += Math.floor(Math.random() * 255) + ', ';
         }
-        return rgb + '0.5)';
+        return 'rgba(' + rgb + '0.5)';
     }
 }
 
