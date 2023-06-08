@@ -1,17 +1,16 @@
-const canvas = document.querySelector('#particles');
+//jshint esnext:true
+const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-class Randomizer {
-    static getRandomColor() {
-        let rgb = '';
-        for (let i = 0; i < 3; i++) {
-            rgb += Math.floor(Math.random() * 255) + ', ';
-        }
-        return `rgba(${rgb}0.5)`;
+const getRandomColor = () => {
+    let rgb = '';
+    for (let i = 0; i < 3; i++) {
+        rgb += Math.floor(Math.random() * 255) + ', ';
     }
-}
+    return `rgba(${rgb}0.5)`;
+};
 
 class Particle {
     constructor() {
@@ -27,7 +26,7 @@ class Particle {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.radius = 50 + Math.random() * 50;
-        this.color = Randomizer.getRandomColor();
+        this.color = getRandomColor();
     }
     draw(ctx) {
         ctx.fillStyle = this.color;
@@ -53,8 +52,9 @@ class ParticlesMob {
 }
 
 const mob = new ParticlesMob();
-(function animationLoop(){
+
+(function animation(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     mob.tick();
-    window.requestAnimationFrame(animationLoop);
+    window.requestAnimationFrame(animation);
 })();
