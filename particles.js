@@ -13,8 +13,8 @@ const getRandomColor = () => {
 };
 
 class Particle {
-    constructor() {
-        this.randomize();
+    constructor(options) {
+        this.randomize(options);
     }
     tick() {
         if (this.radius < 2) {
@@ -22,11 +22,11 @@ class Particle {
         }
         this.radius -= Math.random();
     }
-    randomize() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+    randomize(options) {
+        this.x = options ? options.x : Math.random() * canvas.width;
+        this.y = options ? options.y : Math.random() * canvas.height;
         this.radius = 50 + Math.random() * 50;
-        this.color = getRandomColor();
+        this.color = options ? options.color : getRandomColor();
     }
     draw(ctx) {
         ctx.fillStyle = this.color;
@@ -49,6 +49,9 @@ class ParticlesMob {
             particle.tick();
         });
     }
+    addParticleAt(x, y) {
+        this.particles.push(new Particle({ x, y, color: 'red' }));
+    }
 }
 
 const mob = new ParticlesMob();
@@ -58,3 +61,7 @@ const mob = new ParticlesMob();
     mob.tick();
     window.requestAnimationFrame(animation);
 })();
+
+canvas.addEventListener('click', (ev) => {
+    mob.addParticleAt(ev.clientX, ev.clientY);
+});
