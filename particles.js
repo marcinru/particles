@@ -28,7 +28,7 @@ class Particle {
         this.radius = 50 + Math.random() * 50;
         this.color = options ? options.color : getRandomColor();
     }
-    draw(ctx) {
+    draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -45,7 +45,7 @@ class ParticlesMob {
     }
     tick() {
         this.particles.forEach(particle => {
-            particle.draw(ctx);
+            particle.draw();
             particle.tick();
         });
     }
@@ -56,7 +56,7 @@ class ParticlesMob {
 
 const mob = new ParticlesMob();
 
-(function animation(){
+(function animation() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     mob.tick();
     window.requestAnimationFrame(animation);
